@@ -11,31 +11,43 @@
         <form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employeeForm)">
             <mat-form-field appearance="outline">
                 <mat-label>Employee Id</mat-label>
-                <input matInput placeholder="Employee Id" name="employeeId" [(ngModel)]="employee.employeeId" disabled>
+                <input matInput placeholder="Employee Id" name="id" [(ngModel)]="employee.id" disabled>
                 <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Employee Name</mat-label>
-                <input matInput placeholder="Employee Name" name="employeeName" [(ngModel)]="employee.employeeName">
+                <input matInput placeholder="Employee Name" name="employee_name" [(ngModel)]="employee.employee_name">
                 <mat-icon matSuffix>person</mat-icon>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Contact Number</mat-label>
-                <input matInput placeholder="Contact Number" name="employeeContactNumber" [(ngModel)]="employee.employeeContactNumber">
+                <input matInput placeholder="Contact Number" name="empl_contact_number" [(ngModel)]="employee.empl_contact_number">
                 <mat-icon matSuffix>call</mat-icon>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
+                <mat-label>Salary</mat-label>
+                <input matInput placeholder="Salary" name="salary" [(ngModel)]="employee.salary">
+                <mat-icon matSuffix>moeny</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" name="hireDate" [(ngModel)]="employee.hireDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+            <mat-form-field appearance="outline">
                 <mat-label>Address</mat-label>
-                <input matInput placeholder="Address" name="employeeAddress" [(ngModel)]="employee.employeeAddress">
+                <input matInput placeholder="Address" name="employee_address" [(ngModel)]="employee.employee_address">
                 <mat-icon matSuffix>apartment</mat-icon>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Choose your department</mat-label>
-                <mat-select name="employeeDepartment" [(ngModel)]="employee.employeeDepartment">
+                <mat-select name="employee_depart" [(ngModel)]="employee.employee_depart">
                     <mat-option value="IT">IT</mat-option>
                     <mat-option value="Network">Network</mat-option>
                     <mat-option value="Repair">Repair</mat-option>
@@ -52,7 +64,7 @@
 
             <mat-form-field appearance="outline" class="mt-2">
                 <mat-label>Employee Skills</mat-label>
-                <input matInput placeholder="Employee Skills" name="employeeSkills" [(ngModel)]="employee.employeeSkills" disabled>
+                <input matInput placeholder="Employee Skills" name="employee_skills" [(ngModel)]="employee.employee_skills" disabled>
                 <mat-icon matSuffix>menu_book</mat-icon>
             </mat-form-field>
 

@@ -21,6 +21,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import {MatTableModule} from '@angular/material/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,8 @@ import {MatTableModule} from '@angular/material/table';
     HeaderComponent,
     HomeComponent,
     EmployeeComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +52,11 @@ import {MatTableModule} from '@angular/material/table';
     MatCheckboxModule,
     MatDividerModule,
     MatButtonModule,
-    MatTableModule
+    MatDatepickerModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatNativeDateModule ,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

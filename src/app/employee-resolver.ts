@@ -25,7 +25,9 @@ export const EmployeeResolver: ResolveFn<any> =
                     employeeAddress: '',
                     employeeGender: '',
                     employeeDepartment: '',
-                    employeeSkills: ''
+                    employeeSkills: '',
+                    salary: 0,
+                    hireDate:new Date()
                 }
 
                 return of(employee);

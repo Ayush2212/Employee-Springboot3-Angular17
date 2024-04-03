@@ -28,13 +28,14 @@ export class EmployeeComponent implements OnInit {
 
     this.employee = this.activatedRoute.snapshot.data['employee'];
 
-    console.log(this.employee);
+    console.log("Url Extracted data",this.employee);
+    console.log("employeLength", this.employee.length);
 
-    if (this.employee && this.employee.employeeId > 0) {
+    if (this.employee && this.employee.id > 0) {
       this.isCreateEmployee = false;
-      if (this.employee.employeeSkills != '') {
+      if (this.employee.employee_skills != '') {
         this.skills = [];
-        this.skills = this.employee.employeeSkills.split(',');
+        this.skills = this.employee.employee_skills.split(',');
       }
     } else {
       this.isCreateEmployee = true;
@@ -43,14 +44,15 @@ export class EmployeeComponent implements OnInit {
   }
 
   checkSkills(skill: string) {
-    return this.employee.employeeSkills != null && this.employee.employeeSkills.includes(skill);
+    return this.employee.employee_skills != null && this.employee.employee_skills.includes(skill);
   }
 
   checkGender(gender: string) {
-    return this.employee.employeeGender != null && this.employee.employeeGender == gender;
+    return this.employee.employee_gender != null && this.employee.employee_gender == gender;
   }
 
   saveEmployee(employeeForm: NgForm): void {
+    console.log("formData", employeeForm);
 
     if (this.isCreateEmployee) {
       this.employeeService.saveEmployee(this.employee).subscribe(
@@ -58,9 +60,9 @@ export class EmployeeComponent implements OnInit {
           next: (res: Employee) => {
             console.log(res);
             employeeForm.reset();
-            this.employee.employeeGender = '';
+            this.employee.employee_gender = '';
             this.skills = [];
-            this.employee.employeeSkills = '';
+            this.employee.employee_skills = '';
             this.router.navigate(["/employee-list"]);
           },
           error: (err: HttpErrorResponse) => {
@@ -83,7 +85,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   selectGender(gender: string): void {
-    this.employee.employeeGender = gender;
+    this.employee.employee_gender = gender;
   }
 
   onSkillsChanges(event: any): void {
@@ -100,7 +102,7 @@ export class EmployeeComponent implements OnInit {
       );
     }
 
-    this.employee.employeeSkills = this.skills.toString();
+    this.employee.employee_skills = this.skills.toString();
   }
 
 }

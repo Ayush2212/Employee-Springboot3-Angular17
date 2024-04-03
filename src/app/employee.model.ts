@@ -5,5 +5,7 @@ export interface Employee {
     employeeAddress: string,
     employeeGender: string,
     employeeDepartment: string,
-    employeeSkills: string
+    employeeSkills: string,
+    salary: number,
+    hireDate: Date
 }

@@ -1,0 +1,35 @@
+<h2>details works!</h2>
+
+<div class="search-container">
+    <mat-form-field>
+      <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" [(ngModel)]="startDate">
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" [(ngModel)]="endDate">
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" (click)="searchReviews()">Search</button>
+  </div>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Add other columns as needed -->
+
+    <ng-container matColumnDef="reviewDate">
+        <th mat-header-cell *matHeaderCellDef> Review Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.reviewDate | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="reviewDescription">
+        <th mat-header-cell *matHeaderCellDef> Review Description </th>
+        <td mat-cell *matCellDef="let ele"> {{ele.description}} </td>
+    </ng-container>
+
+    <!-- Add other columns as needed -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

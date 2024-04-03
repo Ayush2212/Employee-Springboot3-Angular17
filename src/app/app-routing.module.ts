@@ -5,11 +5,13 @@ import { HomeComponent } from './home/home.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeResolver } from './employee-resolver';
+import { DetailsComponent } from './details/details.component';
 
 const routes: Routes = [
   {path: 'header', component: HeaderComponent},
   {path: 'employee', component: EmployeeComponent, resolve: {employee: EmployeeResolver} },
   {path: 'employee-list', component: EmployeeListComponent},
+  {path:'details/:id', component: DetailsComponent},
   {path: '', component: HomeComponent}
 ];
 
