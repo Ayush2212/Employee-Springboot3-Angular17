@@ -21,7 +21,7 @@ import java.util.Optional;
 public class EmployeeController {
     @Autowired
     private ModelMapper mapper;
-
+ 
     
     @Autowired
     private EmployeeService employeeService;
@@ -29,7 +29,7 @@ public class EmployeeController {
     @Autowired
     private ProjectsService projectsService;
     @PostMapping("/save/employee")
-    public ResponseEntity<Object> saveEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Object> saveEmployee(@RequestBody EmployeeDto employee) {
         try {
             Employee savedEmployee = employeeService.saveEmployee(employee);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedEmployee);
@@ -82,6 +82,13 @@ public class EmployeeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("No employee for Given Id " + employeeId + e.getMessage());
         }
 //        return employeeService.getEmployees(employeeId);
+    }
+
+    @GetMapping("/department/{departmentName}/average-salary")
+    public Double getAverageSalaryByDepartment(@PathVariable String departmentName) {
+        double salary=employeeService.getAverageSalaryByDepartment(departmentName);
+        System.out.println("average salary is"+ salary);
+        return salary;
     }
 
     @DeleteMapping("/delete/employee/{employeeId}")

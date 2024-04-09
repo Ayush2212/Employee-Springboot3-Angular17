@@ -1,7 +1,13 @@
 package com.java.backend.service;
 
+import com.java.backend.dto.EmployeeDto;
+import com.java.backend.entity.Department;
 import com.java.backend.entity.Employee;
+import com.java.backend.repository.DepartmentDao;
 import com.java.backend.repository.EmployeeDao;
+
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +17,41 @@ import java.util.Optional;
 
 @Service
 public class EmployeeService {
+     @Autowired
+    private ModelMapper mapper;
     @Autowired
     private EmployeeDao employeeDao;
+    @Autowired
+    private DepartmentDao departmentDao;
 
-    public Employee saveEmployee(Employee employee) throws Exception {
+    public Employee saveEmployee(EmployeeDto employee) throws Exception {
         //return employeeDao.save(employee);
         try{
-            Employee savedEmployee= employeeDao.save(employee);
-            return savedEmployee;
+            
+            Long departmentId = employee.getDepartmentId();
+if (departmentId == null) {
+    throw new IllegalArgumentException("Department ID cannot be null");
+}
+ // Log departmentId
+ System.out.println("Department ID: " + departmentId);
+
+Department department = departmentDao.findById(departmentId)
+.orElseThrow(() -> new RuntimeException("Department not found"));
+
+
+        // Log department
+        System.out.println("Department: " + department);
+
+                
+                Employee savedEmployee = new Employee();
+                savedEmployee.setEmployee_name(employee.getEmployee_name());
+                savedEmployee.setEmployee_address(employee.getEmployee_address());
+                savedEmployee.setSalary(employee.getSalary());
+                savedEmployee.setDepartment(department);
+        
+
+            return employeeDao.save(savedEmployee);
+        
         } catch (Exception e){
             throw new Exception("Error saving employee: " + e.getMessage());
         }
@@ -33,6 +66,15 @@ public class EmployeeService {
 
     public List<Employee> findEmployeesBySalaryRange(double minSalary, double maxSalary) {
         return employeeDao.findBySalaryBetween(minSalary, maxSalary);
+    }
+
+    
+    public Double getAverageSalaryByDepartment(String departmentName) {
+        Double averageSalary = employeeDao.findAverageSalaryByDepartment(departmentName);
+    if (averageSalary == null) {
+        throw new RuntimeException("Average salary not found for department: " + departmentName);
+    }
+    return averageSalary;
     }
 
     public Optional<List<Employee>> getEmployees() {
@@ -103,4 +145,19 @@ public class EmployeeService {
 
         return Optional.of(employees);
     }
+
+    private Employee convertToEntity(EmployeeDto employeeDTO) {
+        mapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.LOOSE);
+        Employee employee= mapper.map(employeeDTO, Employee.class);
+//        Employee employee = new Employee();
+        // employee.setEmployee_name(employeeDTO.getEmployeeName());
+        // employee.setEmpl_contact_number(employeeDTO.getEmpContactNumber());
+        // employee.setEmployee_address(employeeDTO.getEmployeeAddress());
+        // employee.setEmployee_gender(employeeDTO.getEmployeeGender());
+        // employee.setEmployee_depart(employeeDTO.getEmployeeDepartment());
+        // employee.setEmployee_skills(employeeDTO.getEmployeeSkills());
+        return employee;
+    }
+
 }

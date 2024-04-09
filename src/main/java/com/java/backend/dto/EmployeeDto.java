@@ -9,14 +9,14 @@ import com.java.backend.entity.Review;
 import lombok.Data;
 @Data
 public class EmployeeDto {
-    private String employee_name;
-    private String empl_contact_number;
-    private String employee_address;
-    private String employee_gender;
-    private String employee_depart;
-    private String employee_skills;
-    private double salary;
-    private String hireDate;
-    private List<Review> reviews;
-    private Set<Projects> projects;
+        private String employee_name;
+        private String empl_contact_number;
+        private String employee_address;
+        private String employee_gender;
+        private Long departmentId; 
+        private String employee_skills;
+        private double salary;
+        private String hireDate;
+        private List<Review> reviews;
+        private Set<Projects> projects;
 }
