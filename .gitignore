@@ -1,2 +1,4 @@
 node_modules
 .angular/cache/16.2.0/
+.angular/cache/16.2.0/angular-webpack
+.angular/cache/16.2.0/babel-webpack
